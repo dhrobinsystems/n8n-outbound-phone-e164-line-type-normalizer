@@ -1,0 +1,38 @@
+{
+  "name": "n8n-outbound-phone-e164-line-type-normalizer",
+  "version": "1.0.0",
+  "description": "n8n workflow that normalizes inbound lead phone numbers to strict E.164, classifies line type (mobile, landline, VoIP) through a carrier lookup, updates HubSpot contact properties and logs masked audit metrics. Safe by default: demo data, DRY_RUN, SANDBOX_MODE and a mock lookup provider.",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "phone-normalizer": "src/index.js"
+  },
+  "scripts": {
+    "lint": "node scripts/lint.js",
+    "test": "node --test tests/*.test.js",
+    "check:workflow": "node scripts/build-workflow.js --check",
+    "build:workflow": "node scripts/build-workflow.js",
+    "verify": "npm run lint && npm run check:workflow && npm test",
+    "demo": "node src/index.js demo",
+    "normalize": "node src/index.js normalize",
+    "start": "node src/index.js serve",
+    "run:contacts": "node src/index.js run --contacts",
+    "properties:create": "node scripts/create-properties.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "n8n",
+    "hubspot",
+    "e164",
+    "phone-normalization",
+    "line-type",
+    "twilio-lookup",
+    "revops",
+    "outbound"
+  ],
+  "author": "DH Robin | dhRobin Systems (https://dhrobinsystems.com)",
+  "homepage": "https://dhrobinsystems.com",
+  "license": "MIT"
+}

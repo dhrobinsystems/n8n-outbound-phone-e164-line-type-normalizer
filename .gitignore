@@ -1,0 +1,16 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+config.json
+!config.example.json
+
+# Local state (lookup budget, metrics)
+data/
+
+# Tooling
+node_modules/
+coverage/
+npm-debug.log*
+*.log
+.DS_Store

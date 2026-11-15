@@ -1,0 +1,75 @@
+{
+  "_comment": "Template only. Copy to config.json (git-ignored). The CLI reads config.json directly. For n8n, minify everything except the environment block into NORMALIZER_CONFIG_JSON (optional: the built-in defaults match this file). Real secrets belong in .env or a secret manager, never in a committed file.",
+
+  "environment": {
+    "HUBSPOT_PRIVATE_APP_TOKEN": "YOUR_HUBSPOT_TOKEN_HERE",
+    "HUBSPOT_BASE_URL": "https://api.hubapi.com",
+    "HUBSPOT_SANDBOX_PORTAL_ID": "YOUR_HUBSPOT_SANDBOX_PORTAL_ID_HERE",
+    "WEBHOOK_SECRET": "YOUR_WEBHOOK_SECRET_HERE",
+    "WEBHOOK_SECRET_HEADER": "x-webhook-secret",
+    "LOOKUP_PROVIDER": "mock",
+    "TWILIO_ACCOUNT_SID": "YOUR_TWILIO_ACCOUNT_SID_HERE",
+    "TWILIO_AUTH_TOKEN": "YOUR_TWILIO_AUTH_TOKEN_HERE",
+    "TWILIO_LOOKUP_BASE_URL": "https://lookups.twilio.com",
+    "DRY_RUN": "true",
+    "SANDBOX_MODE": "true",
+    "AUDIT_WEBHOOK_URL": "YOUR_AUDIT_WEBHOOK_URL_HERE",
+    "ALERT_WEBHOOK_URL": "YOUR_ALERT_WEBHOOK_URL_HERE",
+    "MANUAL_TEST_CONTACT_IDS": "YOUR_SANDBOX_CONTACT_IDS_HERE"
+  },
+
+  "normalization": {
+    "defaultCountry": "US",
+    "countryProperty": "country",
+    "overwriteSourceFields": false,
+    "phoneFields": [
+      {
+        "source": "phone",
+        "e164Property": "phone_e164",
+        "lineTypeProperty": "phone_line_type",
+        "statusProperty": "phone_normalization_status"
+      },
+      {
+        "source": "mobilephone",
+        "e164Property": "mobilephone_e164",
+        "lineTypeProperty": "mobilephone_line_type",
+        "statusProperty": "mobilephone_normalization_status"
+      }
+    ]
+  },
+
+  "eligibility": {
+    "smsLineTypes": ["mobile"],
+    "dialLineTypes": ["mobile", "landline", "fixed_voip", "non_fixed_voip"]
+  },
+
+  "properties": {
+    "smsEligible": "outbound_sms_eligible",
+    "dialEligible": "outbound_dial_eligible",
+    "bestSmsNumber": "outbound_best_sms_number",
+    "bestDialNumber": "outbound_best_dial_number",
+    "carrier": "outbound_phone_carrier",
+    "extension": "outbound_phone_extension",
+    "checkedAt": "outbound_phone_checked_at",
+    "issues": "outbound_phone_issues"
+  },
+
+  "lookup": {
+    "provider": "mock",
+    "maxLookupsPerDay": 500,
+    "cacheDays": 90
+  },
+
+  "maxLeadsPerRequest": 100,
+
+  "sampleLeads": {
+    "_comment": "Fictional sample data for documentation and manual tests. Every number is in a reserved fictional range.",
+    "contacts": [
+      { "company": "Acme Corp", "country": "United States", "phone": "(555) 555-0100" },
+      { "company": "Acme Corp", "country": "US", "phone": "555.555.0101 ext. 204", "mobilephone": "+1 555 555 0102" },
+      { "company": "Example Company Inc.", "country": "United Kingdom", "phone": "+44 (0)20 7946 0018", "mobilephone": "07700 900123" },
+      { "company": "Example Company Inc.", "country": "Australia", "mobilephone": "0491 570 156" }
+    ],
+    "webhookBody": { "objectId": 101 }
+  }
+}
