@@ -35,6 +35,8 @@ Out of the box it is **offline and read-only**:
 
 ## Architecture overview
 
+![Workflow Overview](./assets/workflow-overview.png)
+
 ```
 HubSpot workflow "Send a webhook" ─▶ Lead Intake Webhook ─▶ Validate Intake ─┬─▶ Respond to Webhook (202 / 400 / 401 / 503)
                                                                               └─▶ Intake Accepted? ─no─▶ Raise If Misconfigured
